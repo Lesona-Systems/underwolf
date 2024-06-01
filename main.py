@@ -199,7 +199,7 @@ def main():
 
         # For files in dl_dir, if the file's "last-modified" timestamp is later
         # than the timestamp recorded when we ran the script, assume those
-        # files are the addons we just downloaded.
+        # files are the addons we just downloaded and count them to compare with.
         sleep(3)
         if dl_dir_count == dl_dir_target:
                 for filename in os.listdir(dl_dir):
@@ -373,7 +373,7 @@ def get_wago_update_time(anchor_link, ublock_xpi_path):
     driver.install_addon(ublock)
     driver.get(anchor_link)
 
-    # Wait for addon version number to be visable, then grab it from the download button.
+    # Wait for addon version number to be visible, then grab it from the download button.
     last_updated = [my_elem.get_attribute("innerText") for my_elem in WebDriverWait(driver, 20).until(EC.visibility_of_all_elements_located((By.XPATH, '/html/body/div[1]/div/div/div[3]/div/aside/div/div[1]/div[1]/span/time')))]
     # the above returns a list by default, so reassign "version" to the the first element in the list.
     
